@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>DRAGNDROP</title>
+    <style>
+      img {
+        position: absolute;
+        cursor: grab;
+      }
+    </style>
+  </head>
+  <body style="min-height: 100vh">
+    <img src="http://fe.it-academy.by/Sites/0000007/sax.jpg">
+    <img src="http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png"
+      width="100">
+    <img src="http://fe.it-academy.by/Sites/0000007/Man-and-woman.png"
+      width="150">
+    <img src="http://fe.it-academy.by/Sites/0000007/No_smoking.png"
+      style="padding-left: 50px">
+
+    <script>
+      let draggedElement = null;
+      document.addEventListener('mousedown', function(event) {
+        if (event.target.tagName === 'IMG') {
+          draggedElement = event.target;
+          draggedElement.style.zIndex = 1;
+          draggedElement.offsetX = event.offsetX;
+          draggedElement.offsetY = event.offsetY;
+          document.body.style.cursor = 'grabbing';
+        }
+      });
+
+      document.addEventListener('mousemove', function(event) {
+        if (draggedElement !== null) {
+          draggedElement.style.left = (event.pageX - draggedElement.offsetX) + 'px';
+          draggedElement.style.top = (event.pageY - draggedElement.offsetY) + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (draggedElement !== null) {
+          draggedElement.style.zIndex = '';
+          draggedElement = null;
+          document.body.style.cursor = 'default';
+        }
+      });
+    </script>
+  </body>
+</html>
