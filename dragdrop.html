@@ -11,6 +11,7 @@
       width=150>
     <img src='http://fe.it-academy.by/Sites/0000007/No_smoking.png'
       style='padding-left: 50px'>
+    
    <script>
   function pos() {
     const images = document.getElementsByTagName("img");
@@ -21,9 +22,7 @@
     for (let image of images) {
       image.style.position = "absolute";
       image.addEventListener("mousedown", startDragging);
-      }
-    document.addEventListener("mousemove", move);
-    document.addEventListener("mouseup", stopDragging);
+    }
   }
   
   let distX, distY;
@@ -37,6 +36,8 @@
     distY = eo.pageY - movingImage.offsetTop;
     movingImage.style.zIndex = nextZIndex++;
     movingImage.style.cursor = 'grabbing';
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseup", stopDragging);
   }
 
   function move(eo) {
@@ -50,10 +51,10 @@
     movingImage.style.cursor = 'grab';
     movingImage = null;
     document.removeEventListener("mousemove", move);
+    document.removeEventListener("mouseup", stopDragging);
   }
 
   window.onload = pos;
 </script>
-
   </body>
 </html>
